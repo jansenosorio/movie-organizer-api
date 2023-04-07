@@ -1,10 +1,9 @@
 import { Router } from "express";
+import getAllMovies from "../controllers/movies-controllers.js";
 
 const moviesRoutes = Router()
 
-moviesRoutes.get('/', () => {
-    console.log("Hello Word")
-})
+moviesRoutes.get('/', getAllMovies)
 
 
 export default moviesRoutes
