@@ -5,5 +5,17 @@ async function getMoviesFromDb() {
     return allMovies
 }
 
+async function getMoviesById(id:number) {
+    const moviesById = await connectDB.movies.findUnique({
+        where: {
+            movieId: id
+        }
+    })
 
-export default getMoviesFromDb
+    return moviesById
+}
+
+export {
+    getMoviesFromDb,
+    getMoviesById
+}
