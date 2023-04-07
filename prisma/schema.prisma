@@ -17,6 +17,8 @@ model User {
   createdAt DateTime @default(now())
   deletedAt DateTime?
   comments Comments[]
+
+  @@map("users")
 }
 
 model Movies {
@@ -27,6 +29,8 @@ model Movies {
   comments Comments[]
   platform Platforms @relation(fields: [platformId], references: [platformId])
   platformId Int
+
+  @@map("movies")
 }
 
 model Comments {
@@ -36,12 +40,17 @@ model Comments {
   authorId Int
   movie Movies @relation(fields: [movieId], references: [movieId])
   movieId Int
+  comment String @db.VarChar(150)
+
+  @@map("comments")
 }
 
 model Platforms {
   platformId Int @id @default(autoincrement())
   platformName String
   movies Movies[]
+
+  @@map("platforms")
 }
 
 enum Types {
