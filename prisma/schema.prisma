@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  userId Int @id @default(autoincrement())
+  userName String 
+  userEmail String @db.VarChar(20) @unique
+  createdAt DateTime @default(now())
+  deletedAt DateTime?
+  comments Comments[]
+}
+
+model Movies {
+  movieId Int @id @default(autoincrement())
+  movieName String
+  genreType String
+  status Types @default(WAITING)
+  comments Comments[]
+  platform Platforms @relation(fields: [platformId], references: [platformId])
+  platformId Int
+}
+
+model Comments {
+  id Int @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  author User @relation(fields: [authorId], references: [userId])
+  authorId Int
+  movie Movies @relation(fields: [movieId], references: [movieId])
+  movieId Int
+}
+
+model Platforms {
+  platformId Int @id @default(autoincrement())
+  platformName String
+  movies Movies[]
+}
+
+enum Types {
+  WATCHED
+  WAITING 
+}
+
