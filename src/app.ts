@@ -3,13 +3,14 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import moviesRoutes from './routes/moveis-routes.js'
 import {handleApplicationErrors} from './middleware/error-handling-middleware.js'
+import userRouters from './routes/users-routes.js'
 dotenv.config()
 
 const server = express()
 
 server.use(cors())
 server.use(express.json())
-server.use([moviesRoutes])
+server.use([moviesRoutes, userRouters])
 server.use(handleApplicationErrors)
 
 

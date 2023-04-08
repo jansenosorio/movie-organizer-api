@@ -18,7 +18,7 @@ export function handleApplicationErrors(
     return res.sendStatus(httpStatus.NO_CONTENT);
   }
 
-  if (err.name === 'ConflictError' || err.name === 'DuplicatedEmailError') {
+  if (err.name === 'UserExists') {
     return res.status(httpStatus.CONFLICT).send({
       message: err.message,
     });

@@ -6,5 +6,4 @@ const moviesRoutes = Router()
 moviesRoutes.get('/', getAllMovies)
 moviesRoutes.get('/:id', getMovieById)
 
-
 export default moviesRoutes

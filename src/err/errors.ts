@@ -6,3 +6,10 @@ export function idIsInvalid(): ApplicationError {
         message: "Movie id does not exists"
     }
 }
+
+export function userExists(): ApplicationError {
+    return {
+        name: 'UserExists',
+        message: 'User or email already exists'
+    }
+}
