@@ -9,6 +9,9 @@ async function getMoviesById(id:number) {
     const moviesById = await connectDB.movies.findUnique({
         where: {
             movieId: id
+        },
+        include:{
+            platform: true
         }
     })
 

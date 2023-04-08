@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import {getMoviesFromDb, getMoviesById} from "../repositories/movies-repositories.js";
+import {getMoviesFromDb} from "../repositories/movies-repositories.js";
+import {verifyIfIsValidId} from '../services/movies-services.js'
 import httpStatus from "http-status";
 
 export async function getAllMovies(req: Request, res: Response, next: NextFunction) {
@@ -16,7 +17,7 @@ export async function getMovieById(req:Request, res: Response, next: NextFunctio
     const id : string = req.params.id
 
     try {
-        const movieById = await getMoviesById(Number(id))
+        const movieById = await verifyIfIsValidId(Number(id))
         res.status(httpStatus.OK).send(movieById)
     } catch (err) {
         next(err)

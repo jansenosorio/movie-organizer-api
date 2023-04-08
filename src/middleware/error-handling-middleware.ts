@@ -30,7 +30,7 @@ export function handleApplicationErrors(
     });
   }
 
-  if (err.name === 'NotFoundError') {
+  if (err.name === 'NotFoundError' || err.name === 'InvalidIdError') {
     return res.status(httpStatus.NOT_FOUND).send({
       message: err.message,
     });
