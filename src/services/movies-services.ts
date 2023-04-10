@@ -1,5 +1,5 @@
 import { idIsInvalid } from '../err/errors.js'
-import { getMoviesById, updateMovieRepositorie } from '../repositories/movies-repositories.js'
+import { deleteCommentByIdRepositorie, getCommentsById, getMoviesById, updateMovieRepositorie } from '../repositories/movies-repositories.js'
 
 async function verifyIfIsValidId(id: number) {
     const moviesById = await getMoviesById(id)
@@ -14,7 +14,15 @@ async function updateMovieService(id: number) {
     return movieUpdated
 }
 
+async function deleteCommentByIdService(id: number) {
+    const comment = await getCommentsById(id)
+    if (!comment) throw idIsInvalid()
+    const deletedComment = await deleteCommentByIdRepositorie(id)
+    return deletedComment
+}
+
 export {
     verifyIfIsValidId,
-    updateMovieService
+    updateMovieService,
+    deleteCommentByIdService
 }

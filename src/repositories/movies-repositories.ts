@@ -18,6 +18,16 @@ async function getMoviesById(id: number) {
     return moviesById
 }
 
+async function getCommentsById(id: number) {
+    const moviesById = await connectDB.comments.findUnique({
+        where: {
+            id: id
+        }
+    })
+
+    return moviesById
+}
+
 async function updateMovieRepositorie(id: number) {
     const updatedMovie = await connectDB.movies.update({
         where: {
@@ -29,8 +39,18 @@ async function updateMovieRepositorie(id: number) {
     })
 }
 
+async function deleteCommentByIdRepositorie(id: number) {
+    await connectDB.comments.delete({
+        where: {
+            id: id
+        }
+    })
+}
+
 export {
     getMoviesFromDb,
     getMoviesById,
-    updateMovieRepositorie
+    getCommentsById,
+    updateMovieRepositorie,
+    deleteCommentByIdRepositorie
 }
